@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>dashboard | xdosc</title>
+		<style type="text/css" media="screen">
+			body,a{
+				font-family: Arial, "MS Trebuchet", sans-serif;
+				color:#52c3dd;
+				padding:20px;
+				margin:0;
+			}
+			p{margin:0.5em 0}
+			dd,a{margin:0;padding:0;overflow:hidden;}
+			strong{
+				font-weight:bolder;
+			}
+			header,footer,.header,.footer{
+				font-size:smaller;
+				max-width:400px;
+				min-width:100px;
+				overflow:hidden;
+			}
+			.header{
+				text-transform:uppercase;
+			}
+			.header img{
+				float:left;
+			}
+			.footer dt{
+				font-size:larger;
+				margin:0 0 0.5em;
+			}
+			.panel{
+				color:white;
+				background-color:#52c3dd;
+				overflow:hidden;
+				margin:1em 0;
+				padding:20px;
+				min-width:320px;
+			}
+			.panel dl{
+				max-width:420px;
+				margin:5em 0 4em 0;
+				min-height:50px;
+			}
+			.right{
+				float:right;
+				font-size:larger;
+				text-transform:uppercase;
+			}
+			.right span{
+				font-size:smaller;
+			}
+			.progressbar{
+				background-color:#bedbe8;
+				height:5px;
+			}
+			.progressbar div{
+				background-color:#df9;
+				width:80%;
+				height:100%;
+			}
+			#content{
+				padding:20px 0;
+			}
+			.flip-container{
+				display:block;
+				width:100px;
+				height:100px;
+				float:left;
+				margin:0 5px 5px 0;
+				color:#999;
+				text-decoration:none;
+				font-size:larger;
+				text-transform:capitalize;
+				background-color:rgba(255,255,255,0.2);
+				cursor:pointer;
+			}
+			.flip{
+				width:100px;
+				height:100px;
+			}
+			.front,.back{
+				width:100px;
+				height:100px;
+				background-color:white;
+				position:absolute;
+			}
+			.back{
+				background-color: #9f0;
+				opacity:0;
+					-webkit-transition:opacity 0.5s ease-in-out;
+					-moz-transition:opacity 0.5s ease-in-out;
+					-ms-transition:opacity 0.5s ease-in-out;
+					-o-transition:opacity 0.5s ease-in-out;
+					transition:opacity 0.5s ease-in-out;
+				}
+			.back:hover{
+				opacity:1;
+			}
+			.back a{
+				font-size:5em;
+			}
+			#notice{
+				margin:2em 0;
+				border:1px solid white;
+			}
+      @media screen and (-webkit-transform-3d){
+        .flip-container{
+          -webkit-perspective: 600;
+        }
+        .flip{
+          -webkit-transform-style: preserve-3d;
+          -webkit-transition: -webkit-transform 1s ease-in-out;
+        }
+        .front,.back{
+          -webkit-backface-visibility: hidden;
+        }
+        .back{
+          -webkit-transform: rotateY(180deg);
+          opacity:1;
+        }
+        .flip-container:hover .flip{
+          -webkit-transform: rotateY(-180deg);
+        }
+        .back:hover {
+          opacity:1;
+        }
+        #notice {
+          display:none;
+        }
+      }
+
+
+			.sample{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+			<header class='header'>
+				<img src="logo.png" alt="logo" />
+				<div>
+					A brief dashboard showing <strong>Server Load</strong> and <strong>Downloaded Times</strong>.
+				</div>
+			</header>
+			<div class="panel">
+				<dl>
+					<dt>SERVER LOAD</dt>
+					<div class="progressbar"><div></div></div>
+					<dd id='content'>
+						<div class='flip-container sample'>
+							<div class='flip'>
+								<div class="front">
+									<img src="ubuntu.png"  />
+								</div>
+								<div class="back">ubuntu</div>
+							</div>
+						</div>
+					</dd>
+					<dd>
+						<a href="http://groups.xdlinux.info/" ><img src="mail.png" alt="Mail List" /></a>
+						<a href="http://t.xdlinux.info/" ><img src="twitter.png" alt="Twitter" /></a>
+						<a href="http://xdlinux.info/bbs/" ><img src="bbs.png" alt="BBS" /></a>
+						<a href="ftp://linux.xidian.edu.cn/" ><img src="ftp.png" alt="FTP" /></a>
+					</dd>
+					<dd>When discovered something new, we put an eye on it.
+					<br>When discovered something cool, we spread it.
+					<br>All we know, all we have, all we like, we'd like to share with you! </dd>
+					<dd id="notice">
+						Mozzilla Firefox 4.0+ , Chrome 7+(with GPU render enabled), Safari 5.0+ are recommended to view this page.
+					</dd>
+				</dl>
+				<div class="right">E<span>njoy</span> I<span>t</span></div>
+			</div>
+			<footer class='footer'>
+				<dl>
+					<dt>
+					<strong>Open Source For Everyone</strong>
+					</dt>
+					<dd>
+<p>					We believe that Open Source make lives better, not only for programer but also for everyone who need to work with computer.</p>
+<p>					Explore our site to know who we are, what we do and why we do that.</p>
+<p>					Know more about Open Source, please refer to <a href="http://en.wikipedia.org/wiki/Open_source#Computer_software"><strong>Wikipedia</strong></a></p>
+					</dd>
+					
+				</dl>
+				</footer>
+				<script type="text/javascript" charset="utf-8" src='js/jquery.min.js'>
+				</script>
+			<script type="text/javascript" charset="utf-8">
+				var ss=new Array('ubuntu','fedora','gentoo','debian','arch','centos','freebsd')
+ss.forEach(function(t){
+		var node=$('.sample').clone().removeClass('sample');
+		node.find('img').attr('src',t+'.png');
+		node.find('.back').text(t).append("<br><a href='ftp://xdlinux.info/"+t+"' >"+ Math.round(Math.random()*100)+ "</a>");
+		$('#content').append(node);
+		})
+			</script>
+	</body>
+</html>
