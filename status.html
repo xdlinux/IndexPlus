@@ -7,7 +7,7 @@
 			body,a{
 				font-family: Arial, "MS Trebuchet", sans-serif;
 				color:#52c3dd;
-				padding:20px;
+				padding:10px 20px;
 				margin:0;
 			}
 			p{margin:0.5em 0}
@@ -39,10 +39,9 @@
 				padding:20px;
 				min-width:320px;
 			}
-			.panel dl{
-				max-width:700px;
-				margin:5em 0 4em 0;
-				min-height:50px;
+      .panel dl{
+        max-width:600px;
+        margin:5em 0 4em 0;
 			}
 			.right{
 				float:right;
@@ -53,51 +52,61 @@
 				font-size:smaller;
 			}
 			#content{
-				padding:20px 0;
+        padding:20px 0;
+        width:auto;
+        height:auto;
 			}
-			.flip-container{
-				display:block;
-				width:100px;
-				height:100px;
-				float:left;
-				margin:0 10px 10px 0;
-				color:#999;
+      .flip-container {
+        color:#fff;
+        float:left;
 				text-decoration:none;
 				font-size:larger;
-				text-transform:capitalize;
-				background-color:rgba(255,255,255,0.2);
-				cursor:pointer;
-			}
-			.flip{
-				width:100px;
+        width:100px;
         height:100px;
+        display:block;
+        margin:0 10px 10px 0;
+				background-color:rgba(255,255,255,0.2);
+      }
+      .flip-container:hover {
+      }
+      .flip{
+				width:auto;
+        height:auto;
 			}
 			.front{
 				width:100px;
 				height:100px;
 				background-color:white;
-				position:absolute;
 			}
       .back{
-        z-index:1;
-				position:absolute;
-				background-color: #f3d575;
-				opacity:0;
+        position:absolute;
+        left:-9000px;
+        top:-9000px;
+        padding:0 8px;
+        opacity:0;
+				background-color: #ffd23f;
         -webkit-transition:opacity 0.5s ease-in-out;
         -moz-transition:opacity 0.5s ease-in-out;
         -ms-transition:opacity 0.5s ease-in-out;
         -o-transition:opacity 0.5s ease-in-out;
         transition:opacity 0.5s ease-in-out;
-			}
-			.back:hover {
-				opacity:1;
+      }
+
+      .back ul {
+        padding:0;
       }
       .back li {
         list-style: none outside none;
       }
 
-			a.repo {
+      a.repo {
+        color:#0a77ff;
+        display:block;
 				font-size:2em;
+        text-decoration:none;
+      }
+      a.log {
+        color:#fff;
       }
 
 			#notice{
@@ -105,35 +114,28 @@
 				border:1px solid white;
       }
 
-      @media screen and (-webkit-transform-3d){
-        .flip-container{
-          -webkit-perspective: 600;
-        }
-        .flip{
-          -webkit-transform-style: preserve-3d;
-          -webkit-transition: -webkit-transform 1s ease-in-out;
-        }
-        .front,.back{
-          -webkit-backface-visibility: hidden;
-        }
-        .back{
-          -webkit-transform: rotateY(180deg);
-          opacity:1;
-        }
-        .flip-container:hover .flip{
-          -webkit-transform: rotateY(-180deg);
-        }
-        .back:hover {
-          opacity:1;
-        }
-        #notice {
-          display:none;
-        }
-      }
-
 			.sample{
 				display:none;
-			}
+      }
+
+      .syncing{
+        -webkit-box-shadow: 0px 0px 10px #0bff00;
+        -moz-box-shadow: 0px 0px 10px #0BFF00;
+        -o-box-shadow: 0px 0px 10px #0BFF00;
+        -ms-box-shadow: 0px 0px 10px #0BFF00;
+        box-shadow: 0px 0px 10px #0BFF00;
+      }
+      .fail{
+        -webkit-box-shadow: 0px 0px 10px #ff0300;
+        -moz-box-shadow: 0px 0px 10px #ff0300;
+        -o-box-shadow: 0px 0px 10px #ff0300;
+        -ms-box-shadow: 0px 0px 10px #ff0300;
+        box-shadow: 0px 0px 10px #ff0300;
+      }
+      .fail .front {
+        background: #ff0300;
+      }
+
 		</style>
 	</head>
 	<body>
@@ -145,16 +147,16 @@
 			</header>
 			<div class="panel">
 				<dl>
-					<dd id='content'>
-						<div class='flip-container sample'>
-							<div class='flip'>
-								<div class="front">
-									<img src="img/ubuntu.png"  />
-								</div>
-                <div class="back">
-                </div>
-							</div>
-						</div>
+          <dd id='content'>
+          <div class='flip-container sample'>
+            <div class='flip'>
+              <div class="front">
+                <img src="img/ubuntu.png"  />
+              </div>
+              <div class="back">
+              </div>
+            </div>
+          </div>
 					</dd>
 					<dd>
 						<a href="http://groups.xdlinux.info/" ><img src="img/mail.png" alt="Mail List" /></a>
@@ -194,28 +196,49 @@
             dataType: 'json',
             success: onDataReceived
           });
-
           function onDataReceived(ss){ 
             $.each(ss,function(i,t){
               if( t.status == "0")
-                stat="Success";
-              else if ( t.status == "-1" )
-                stat="Syncing";
+              {
+                stat="<span style='color:#0056ff;'>Success!</span>";
+                s_class="";
+              }
+              else if ( t.status == "-1" ){
+                stat="<span style='color:#41ff00;'>Syncing</span>";
+                s_class="syncing";
+              }
               else 
-                stat="FAIL!";
+              {
+                stat="<span style='color:#ff0c00;'><b>FAIL!</b></span>";
+                s_class="fail";
+              }
               var node=$('.sample').clone().removeClass('sample');
+              node.addClass(s_class);
               node.find('img').attr('src','img/'+t.icon);
-              node.find('.back').append("<br/><a class='repo' href='http://ftp.xdlinux.info/"+i+"' >"+i+"</a><br /> "
+              node.find('.back').append("<br/><a class='repo' href='http://ftp.xdlinux.info/"+i+"' >"+i+"</a> "
                 +"<div class='status'><ul>"
-                +"<li> Log:<a href='"+t.log+"'>"+i+".log</a> </li>"
-                +"<li> Status:"+ stat +" </li>"
-                +"<li> Upstream:"+ t.upstream +" </li>"
-                +"<li> LastSync:"+ t.lastsync +" </li>"
+                +"<li> <b>Log</b>: &nbsp;&nbsp;<a class='log' href='"+t.log+"'>"+i+".log</a> </li>"
+                +"<li> <b>Status</b>:&nbsp;&nbsp;"+ stat +" </li>"
+                +"<li> <b>Upstream</b>:&nbsp;&nbsp;"+ t.upstream +" </li>"
+                +"<li> <b>LastSync</b>:&nbsp;&nbsp;"+ t.lastsync +" </li>"
               +"</ul></div>");
               $('#content').append(node);
             });
+            $('.flip').hover(function(){
+              $(this).children(".back").css({
+                "left":$(this).offset().left,
+                "top":$(this).offset().top,
+                "opacity":1
+              }); 
+            },function(){
+              $(this).children(".back").css({
+                "left":-9000,
+                "top":-9000,
+                "opacity":0
+              }); 
+            });
         }
-
+        
         });
       </script>
 	</body>
