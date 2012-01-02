@@ -1,245 +1,121 @@
 <!DOCTYPE HTML>
+<!--
+COPYRIGHT (c) Xidian Open Source Community < xdl@xdlinux.info >
+Author:
+  - Shanzi <ant_sz@xdlinux.info>
+  - Justin Wong <bigeagle@xdlinux.info>
 
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+-->
 <html>
-	<head>
-		<title>Mirror Status | xdlinux</title>
-		<style type="text/css">
-			body,a{
-				font-family: Arial, "MS Trebuchet", sans-serif;
-				color:#52c3dd;
-				padding:10px 20px;
-				margin:0;
-			}
-			p{margin:0.5em 0}
-			dd,a{margin:0;padding:0;overflow:hidden;}
-			strong{
-				font-weight:bolder;
-			}
-			header,footer,.header,.footer{
-				font-size:smaller;
-				max-width:400px;
-				min-width:100px;
-				overflow:hidden;
-			}
-			.header{
-				text-transform:uppercase;
-			}
-			.header img{
-				float:left;
-			}
-			.footer dt{
-				font-size:larger;
-				margin:0 0 0.5em;
-			}
-			.panel{
-				color:white;
-				background-color:#52c3dd;
-				overflow:hidden;
-				margin:1em 0;
-				padding:20px;
-				min-width:320px;
-			}
-      .panel dl{
-        max-width:600px;
-        margin:5em 0 4em 0;
-			}
-			.right{
-				float:right;
-				font-size:larger;
-				text-transform:uppercase;
-			}
-			.right span{
-				font-size:smaller;
-			}
-			#content{
-        padding:20px 0;
-        width:auto;
-        height:auto;
-			}
-      .flip-container {
-        color:#fff;
-        float:left;
-				text-decoration:none;
-				font-size:larger;
-        width:100px;
-        height:100px;
-        display:block;
-        margin:0 10px 10px 0;
-				background-color:rgba(255,255,255,0.2);
-      }
-      .flip-container:hover {
-      }
-      .flip{
-				width:auto;
-        height:auto;
-			}
-			.front{
-				width:100px;
-				height:100px;
-				background-color:white;
-			}
-      .back{
-        position:absolute;
-        left:-9000px;
-        top:-9000px;
-        padding:0 8px;
-        opacity:0;
-				background-color: #ffd23f;
-        -webkit-transition:opacity 0.5s ease-in-out;
-        -moz-transition:opacity 0.5s ease-in-out;
-        -ms-transition:opacity 0.5s ease-in-out;
-        -o-transition:opacity 0.5s ease-in-out;
-        transition:opacity 0.5s ease-in-out;
-      }
-
-      .back ul {
-        padding:0;
-      }
-      .back li {
-        list-style: none outside none;
-      }
-
-      a.repo {
-        color:#0a77ff;
-        display:block;
-				font-size:2em;
-        text-decoration:none;
-      }
-      a.log {
-        color:#fff;
-      }
-
-			#notice{
-				margin:2em 0;
-				border:1px solid white;
-      }
-
-			.sample{
-				display:none;
-      }
-
-      .syncing{
-        -webkit-box-shadow: 0px 0px 10px #0bff00;
-        -moz-box-shadow: 0px 0px 10px #0BFF00;
-        -o-box-shadow: 0px 0px 10px #0BFF00;
-        -ms-box-shadow: 0px 0px 10px #0BFF00;
-        box-shadow: 0px 0px 10px #0BFF00;
-      }
-      .fail{
-        -webkit-box-shadow: 0px 0px 10px #ff0300;
-        -moz-box-shadow: 0px 0px 10px #ff0300;
-        -o-box-shadow: 0px 0px 10px #ff0300;
-        -ms-box-shadow: 0px 0px 10px #ff0300;
-        box-shadow: 0px 0px 10px #ff0300;
-      }
-      .fail .front {
-        background: #ff0300;
-      }
-
-		</style>
-	</head>
-	<body>
-			<header class='header'>
-				<img src="img/logo.png" alt="logo" />
-				<div>
-					A brief dashboard showing xdlinux mirror syncronizing status.
-				</div>
-			</header>
-			<div class="panel">
-				<dl>
-          <dd id='content'>
-          <div class='flip-container sample'>
-            <div class='flip'>
-              <div class="front">
-                <img src="img/ubuntu.png"  />
-              </div>
-              <div class="back">
-              </div>
+  <head>
+    <title>Mirror Status | xdlinux</title>
+    <link rel="stylesheet" type="text/css" href="style.css" /> 
+  </head>
+  <body>
+    <header class='header'>
+    <img src="img/logo.png" alt="logo" />
+    <p>A brief dashboard showing xdlinux mirror syncronizing status.</p>
+    </header>
+    <div class="panel">
+      <dl>
+        <dd id='content'>
+        <div class='flip-container sample'>
+          <div class='flip'>
+            <div class="front">
+              <img src="img/ubuntu.png"  />
+            </div>
+            <div class="back">
             </div>
           </div>
-					</dd>
-					<dd>
-						<a href="http://groups.xdlinux.info/" ><img src="img/mail.png" alt="Mail List" /></a>
-						<a href="http://t.xdlinux.info/" ><img src="img/twitter.png" alt="Twitter" /></a>
-						<a href="http://xdlinux.info/bbs/" ><img src="img/bbs.png" alt="BBS" /></a>
-						<a href="ftp://linux.xidian.edu.cn/" ><img src="img/ftp.png" alt="FTP" /></a>
-					</dd>
-					<dd>When discovered something new, we put an eye on it.
-					<br>When discovered something cool, we spread it.
-					<br>All we know, all we have, all we like, we'd like to share with you! </dd>
-					<dd id="notice">
-						Mozzilla Firefox 4.0+ , Chrome 7+(with GPU render enabled), Safari 5.0+ are recommended to view this page.
-					</dd>
-				</dl>
-				<div class="right">E<span>njoy</span> I<span>t</span></div>
-			</div>
-			<footer class='footer'>
-				<dl>
-					<dt>
-					<strong>Open Source For Everyone</strong>
-					</dt>
-					<dd>
-<p>					We believe that Open Source make lives better, not only for programer but also for everyone who need to work with computer.</p>
-<p>					Explore our site to know who we are, what we do and why we do that.</p>
-<p>					Know more about Open Source, please refer to <a href="http://en.wikipedia.org/wiki/Open_source#Computer_software"><strong>Wikipedia</strong></a></p>
-					</dd>
-					
-				</dl>
-				</footer>
-				<script type="text/javascript" charset="utf-8" src='js/jquery.min.js'>
-				</script>
-			<script type="text/javascript" charset="utf-8">
-        $(document).ready(function(){
-          $.ajax({
-            url: "/m_status.json",
-            method: 'GET',
-            dataType: 'json',
-            success: onDataReceived
-          });
-          function onDataReceived(ss){ 
-            $.each(ss,function(i,t){
-              if( t.status == "0")
-              {
-                stat="<span style='color:#0056ff;'>Success!</span>";
-                s_class="";
-              }
-              else if ( t.status == "-1" ){
-                stat="<span style='color:#41ff00;'>Syncing</span>";
-                s_class="syncing";
-              }
-              else 
-              {
-                stat="<span style='color:#ff0c00;'><b>FAIL!</b></span>";
-                s_class="fail";
-              }
-              var node=$('.sample').clone().removeClass('sample');
-              node.addClass(s_class);
-              node.find('img').attr('src','img/'+t.icon);
-              node.find('.back').append("<br/><a class='repo' href='http://ftp.xdlinux.info/"+i+"' >"+i+"</a> "
-                +"<div class='status'><ul>"
-                +"<li> <b>Log</b>: &nbsp;&nbsp;<a class='log' href='"+t.log+"'>"+i+".log</a> </li>"
-                +"<li> <b>Status</b>:&nbsp;&nbsp;"+ stat +" </li>"
-                +"<li> <b>Upstream</b>:&nbsp;&nbsp;"+ t.upstream +" </li>"
-                +"<li> <b>LastSync</b>:&nbsp;&nbsp;"+ t.lastsync +" </li>"
-              +"</ul></div>");
-              $('#content').append(node);
-            });
-            $('.flip').hover(function(){
-              $(this).children(".back").css({
-                "left":$(this).offset().left,
-                "top":$(this).offset().top,
-                "opacity":1
-              }); 
-            },function(){
-              $(this).children(".back").css({
-                "left":-9000,
-                "top":-9000,
-                "opacity":0
-              }); 
-            });
-        }
-        
+        </div>
+        </dd>
+        <dd>
+        <a href="http://groups.xdlinux.info/" ><img src="img/mail.png" alt="Mail List" /></a>
+        <a href="http://t.xdlinux.info/" ><img src="img/twitter.png" alt="Twitter" /></a>
+        <a href="http://xdlinux.info/bbs/" ><img src="img/bbs.png" alt="BBS" /></a>
+        <a href="ftp://linux.xidian.edu.cn/" ><img src="img/ftp.png" alt="FTP" /></a>
+        </dd>
+        <dd>When discovered something new, we put an eye on it.
+        <br>When discovered something cool, we spread it.
+        <br>All we know, all we have, all we like, we'd like to share with you! </dd>
+        <dd id="notice">
+        Mozzilla Firefox 4.0+ , Chrome 7+(with GPU render enabled), Safari 5.0+ are recommended to view this page.
+        </dd>
+      </dl>
+      <div class="right">E<span>njoy</span> I<span>t</span></div>
+    </div>
+    <footer class='footer'>
+    <dl>
+      <dt>
+      <strong>Open Source For Everyone</strong>
+      </dt>
+      <dd>
+      <p>					We believe that Open Source make lives better, not only for programer but also for everyone who need to work with computer.</p>
+      <p>					Explore our site to know who we are, what we do and why we do that.</p>
+      <p>					Know more about Open Source, please refer to <a href="http://en.wikipedia.org/wiki/Open_source#Computer_software"><strong>Wikipedia</strong></a></p>
+      </dd>
+
+    </dl>
+    </footer>
+    <script type="text/javascript" charset="utf-8" src='js/jquery.min.js'>
+    </script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){
+        $.ajax({
+          url: "/m_status.json",
+          method: 'GET',
+          dataType: 'json',
+          success: onDataReceived
         });
-      </script>
-	</body>
+        function onDataReceived(ss){ 
+          $.each(ss,function(i,t){
+            if( t.status == "0")
+            {
+              stat="<span style='color:#0056ff;'>Success!</span>";
+              s_class="";
+            }
+            else if ( t.status == "-1" ){
+              stat="<span style='color:#ffe700;'>Syncing</span>";
+              s_class="syncing";
+            }
+            else 
+            {
+              stat="<span style='color:#fffc00;'><b>FAIL!</b></span>";
+              s_class="fail";
+            }
+            var node=$('.sample').clone().removeClass('sample');
+            node.addClass(s_class);
+            node.find('img').attr('src','img/'+t.icon);
+            node.find('.back').append("<br/><a class='repo' href='http://ftp.xdlinux.info/"+i+"' >"+i+"</a> "
+              +"<div class='status'><ul>"
+              +"<li> <b>Status</b>:&nbsp;&nbsp;"+ stat +"&nbsp;&nbsp;<a class='log'"
+              +"href='"+t.log+"'>"+i+".log</a> </li>"
+              +"<li> <b>Upstream</b>:&nbsp;&nbsp;"+ t.upstream +" </li>"
+              +"<li> <b>LastSync</b>:&nbsp;&nbsp;"+ t.lastsync +" </li>"
+            +"</ul></div>");
+            $('#content').append(node);
+          });
+          $('.flip').hover(function(){
+            $(this).children(".back").css({
+              "left":$(this).offset().left,
+              "top":$(this).offset().top,
+              "opacity":1
+            }); 
+          },function(){
+            $(this).children(".back").css({
+              "left":-9000,
+              "top":-9000,
+              "opacity":0
+            }); 
+          });
+        }
+
+      });
+    </script>
+  </body>
 </html>
