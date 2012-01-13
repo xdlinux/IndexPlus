@@ -1,0 +1,96 @@
+body {
+  margin-top: 1.0em;
+  background: #e1e1e1 repeat url(img/bg.png) 0 0;
+  background-attachment: fixed;
+  font-family: Helvetica, Arial,微软雅黑,  FreeSans, san-serif;
+  text-shadow: 1px 1px 0px #FFFFFF;
+  color:#202d2f;
+}
+
+p{margin:0.5em 0}
+a {
+  color:#2266b4;
+  text-decoration:none;
+}
+a:hover {
+  color:#ffb000;
+  text-decoration:none;
+}
+strong{
+  font-weight:bolder;
+}
+
+#content{
+  padding:0 10%;
+  width:auto;
+  height:auto;
+}
+#nav {
+  position:absolute;
+  top:0px;
+  left:20px;
+}
+#nav ul , .feed ul{
+  padding:0;
+}
+#nav li {
+  background:rgb(36,87,176);
+  background:rgba(36,87,176,0.6);
+  border-radius:20px 20px 20px 20px;
+  -webkit-border-radius:20px 20px 20px 20px;
+  -moz-border-radius:20px 20px 20px 20px;
+  -o-border-radius:20px 20px 20px 20px;
+  -ms-border-radius:20px 20px 20px 20px;
+  margin: 1em 0 1em 0;
+}
+#nav li.hover {
+  background:rgb(255,168,0);
+  background:rgba(255,168,0,0.8);
+}
+#nav li, .feed li {
+  list-style: none outside none;
+}
+#nav .bbs {
+  background: repeat url(img/bbs.png) 0 0;
+}
+#nav .mirror {
+  background: repeat url(img/ftp.png) 0 0;
+}
+#nav .wiki {
+  background: repeat url(img/wiki.png) 0 0;
+}
+#nav .project {
+  background: repeat url(img/github.png) 0 0;
+}
+#nav .rt {
+  background: repeat url(img/twitter.png) 0 0;
+}
+#nav .book {
+  background: repeat url(img/book.png) 0 0;
+}
+
+#nav a {
+  display:block;
+  width:40px;
+  height:40px;
+}
+
+
+.hidden{
+  display:none;
+}
+.feed {
+  width:320px;
+  min-height:140px;
+  /*float:left;*/
+}
+h4 {
+  margin:.2em;
+}
+.items {
+  margin:0 0;
+}
+.feed h4 a {
+color:#ef7715;
+text-decoration:none;
+}

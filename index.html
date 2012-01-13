@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>西电开源社区 - 0pen Source, 0pen Mind!</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" /> 
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.jfeed.pack.js"></script>
+<script type="text/javascript" src="js/spin.min.js"></script>
+<script type="text/javascript" src="js/jquery.spin.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".loader").spin("small","#2c5794");
+
+        navYloc = parseInt($("#nav").css("top").substring(0, $("#nav").css("top").indexOf("px")));
+        $(window).scroll(function() { 
+            offset = navYloc + $(document).scrollTop() + "px"; 
+            $("#nav").animate({ top: offset }, { duration: 500, queue: false }); 
+        }); 
+        
+        $("#nav li").hover(function(){
+            $(this).addClass("hover"); 
+        },function(){
+            $(this).removeClass("hover"); 
+        });
+
+        function getNews(url,id){
+            $.getFeed({
+                url: url,
+                error: function(XMLHttpRequest) {
+                    $(id).find('.loader').addClass("hidden"); 
+                    $(id).append(
+                        '<div class="error_msg" > 矮油！出错啦！ </div>'
+                    );
+                },
+                success: function(feed) {
+                    $(id).find('.loader').addClass("hidden"); 
+                    var html = '';
+                    for(var i = 0; i < feed.items.length && i < 11; i++) {
+                        var item = feed.items[i];
+                        html +='<li><a href="'
+                        + item.link
+                        + '">'
+                        + item.title
+                        + '</a></li>';
+                    }
+                    $( id+' ul.items').append(html);
+                }    
+            });
+        }
+        getNews("/git.atom","#github");
+        getNews("/bbs/feed","#bbs");
+        getNews("/wiki/feed","#wiki");
+    });
+
+</script>
+
+</head>
+<body>
+<div id="nav">
+    <ul>
+        <li><a href="/bbs/" class="bbs"></a></li>
+        <li><a href="/wiki/" class="wiki"></a></li>
+        <li><a href="/index/status.html" class="mirror"></a></li>
+        <li><a href="/index/projects.html" class="project"></a></li>
+        <li><a href="http://ftp.xdlinux.info/book/" class="book"></a></li>
+        <li><a href="http://rt.xdlinux.info/" class="rt"></a></li>
+    </ul>
+</div>
+<div id="content">
+    <h1> 西电开源社区 - 0pen Source, 0pen Mind!</h1> 
+    <div id="current" class="hidden"> 
+        <h3> 正在进行 </h3>
+    </div>
+    <div id="mirro">
+    </div>
+    <div id="news">
+        <h3>社区动态</h3>
+        <div id="bbs" class="feed">
+            <h4><a href="/bbs">论坛新帖</a></h4>
+            <div class="items">
+                <ul class="items">
+                </ul>
+            </div>
+            <div class="loader" ></div>
+        </div>
+        <div id="wiki" class="feed">
+            <h4><a href="/wiki">Wiki更新</a></h4>
+            <div class="items">
+                <ul class="items">
+                </ul>
+            </div>
+            <div class="loader" ></div>
+        </div>
+        <div id="github" class="feed">
+            <h4><a href="/index/project.html">项目动态</a></h4>
+            <div class="items">
+                <ul class="items">
+                </ul>
+            </div>
+            <div class="loader" ></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
