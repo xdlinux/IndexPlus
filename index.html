@@ -11,45 +11,50 @@
 <script type="text/javascript" src="js/jquery.spin.js"></script>
 
 <script type="text/javascript">
+    // get rss from @url and put into @id 
+    function getNews(url,id){
+        $.getFeed({
+            url: url,
+            error: function(XMLHttpRequest) {
+                $(id).find('.loader').addClass("hidden"); 
+                $(id).append(
+                    '<div class="error_msg" > 矮油！出错啦！ </div>'
+                );
+            },
+            success: function(feed) {
+                $(id).find('.loader').addClass("hidden"); 
+                var html = '';
+                for(var i = 0; i < feed.items.length && i < 11; i++) {
+                    var item = feed.items[i];
+                    html +='<li><a href="'
+                    + item.link
+                    + '">'
+                    + item.title
+                    + '</a></li>';
+                }
+                $( id+' ul.items').append(html);
+            }    
+        });
+    }
     $(document).ready(function() {
+        //ajax loading animation
         $(".loader").spin("small","#2c5794");
-
+        
+        //fix navigation panel position
         navYloc = parseInt($("#nav").css("top").substring(0, $("#nav").css("top").indexOf("px")));
         $(window).scroll(function() { 
             offset = navYloc + $(document).scrollTop() + "px"; 
             $("#nav").animate({ top: offset }, { duration: 500, queue: false }); 
         }); 
-        
+
+        //navigation button hover style change
         $("#nav li").hover(function(){
             $(this).addClass("hover"); 
         },function(){
             $(this).removeClass("hover"); 
         });
-
-        function getNews(url,id){
-            $.getFeed({
-                url: url,
-                error: function(XMLHttpRequest) {
-                    $(id).find('.loader').addClass("hidden"); 
-                    $(id).append(
-                        '<div class="error_msg" > 矮油！出错啦！ </div>'
-                    );
-                },
-                success: function(feed) {
-                    $(id).find('.loader').addClass("hidden"); 
-                    var html = '';
-                    for(var i = 0; i < feed.items.length && i < 11; i++) {
-                        var item = feed.items[i];
-                        html +='<li><a href="'
-                        + item.link
-                        + '">'
-                        + item.title
-                        + '</a></li>';
-                    }
-                    $( id+' ul.items').append(html);
-                }    
-            });
-        }
+        
+        //fetch rss
         getNews("/git.atom","#github");
         getNews("/bbs/feed","#bbs");
         getNews("/wiki/feed","#wiki");

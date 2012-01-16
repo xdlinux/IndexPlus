@@ -44,6 +44,8 @@ strong{
 #nav {
   z-index:0;
 }
+
+/* round navigation button */
 #nav li {
   line-height:1.2em;
   background:rgb(36,87,176);
@@ -94,6 +96,7 @@ strong{
   height:40px;
 }
 
+/* navigation tip shows only when button is on mouse hovered */
 #nav a span {
   display:block;
   opacity:0;
@@ -147,7 +150,6 @@ strong{
 .feed {
   width:320px;
   min-height:140px;
-  /*float:left;*/
 }
 h4 {
   margin:.2em;
