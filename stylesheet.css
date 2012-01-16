@@ -47,18 +47,22 @@ strong{
 #nav li {
   line-height:1.2em;
   background:rgb(36,87,176);
-  background:rgba(36,87,176,0.6);
+  background:rgba(36,87,176,0.8);
+  -pie-background:rgba(36,87,176,0.8);
   border-radius:20px 20px 20px 20px;
   -webkit-border-radius:20px 20px 20px 20px;
   -moz-border-radius:20px 20px 20px 20px;
   -o-border-radius:20px 20px 20px 20px;
   -ms-border-radius:20px 20px 20px 20px;
   margin: 1em 0 1em 0;
+  behavior: url(PIE.htc);
 }
 
 #nav li.hover {
   background:rgb(255,168,0);
   background:rgba(255,168,0,0.8);
+  -pie-background:rgba(255,168,0,0.8);
+  behavior: url(PIE.htc);
 }
 
 #nav .bbs {
@@ -100,36 +104,38 @@ strong{
   left:50px;
   cursor:pointer;
   padding-left:4px;
-  background:rgb(255,255,255);
-  background:rgba(255,255,255,0.6);
   border-radius:10px 10px 10px 10px;
   -webkit-border-radius:10px 10px 10px 10px;
   -moz-border-radius:10px 10px 10px 10px;
   -o-border-radius:10px 10px 10px 10px;
   -ms-border-radius:10px 10px 10px 10px;
-	-webkit-transition:all 0.5s ease-in-out;
-	-moz-transition:all 0.5s ease-in-out;
-	-o-transition:all 0.5s ease-in-out;
-	-ms-transition:all 0.5s ease-in-out;
-	transition:all 0.5s ease-in-out;	
+  -webkit-transition:all 0.5s ease-in-out;
+  -moz-transition:all 0.5s ease-in-out;
+  -o-transition:all 0.5s ease-in-out;
+  -ms-transition:all 0.5s ease-in-out;
+  transition:all 0.5s ease-in-out;	
 }
+
 #nav a span div {
   display:none;
 }
-#nav a:hover {
+#nav li.hover a {
   color:#888;
   text-shadow: 1px 1px 1px #ffcd00;
 }
 
-#nav a:hover span,#nav a:focus span,#nav a:active span {
-  display:block; 
+#nav a:hover span {
+  behavior: url(PIE.htc);
+  background:none;
+  background:rgba(255,255,255,0.6);
   opacity:1;
   width:5em;
   height:1.2em;
   top:10px;
   left:50px;
 }
-#nav a:hover span div {
+
+#nav li.hover a span div {
   display:block;
   width:5em;
 }
@@ -137,6 +143,7 @@ strong{
 .hidden{
   display:none;
 }
+
 .feed {
   width:320px;
   min-height:140px;
