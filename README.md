@@ -5,6 +5,7 @@ IndexPlus
 诚招开发人员
 ----
 我们期待你的加入，你只需要略懂以下技能中的一项或几项:
+
 * javascript/jQuery
 * HTML, CSS
 * 美工设计
