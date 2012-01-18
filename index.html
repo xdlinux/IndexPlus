@@ -6,13 +6,17 @@
 <title>西电开源社区 - 0pen Source, 0pen Mind!</title>
 <link rel="stylesheet" type="text/css" href="stylesheet.css" /> 
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.timeago.js"></script>
+<script type="text/javascript" src="js/jquery.timeago.zh-cn.js"></script>
 <script type="text/javascript" src="js/jquery.jfeed.pack.js"></script>
 <script type="text/javascript" src="js/spin.min.js"></script>
 <script type="text/javascript" src="js/jquery.spin.js"></script>
 
 <script type="text/javascript">
     // get rss from @url and put into @id 
-    function getNews(url,id){
+    function getNews(options){
+        var url=options.url;
+        var id=options.container;
         $.getFeed({
             url: url,
             error: function(XMLHttpRequest) {
@@ -26,11 +30,13 @@
                 var html = '';
                 for(var i = 0; i < feed.items.length && i < 11; i++) {
                     var item = feed.items[i];
-                    html +='<li><a href="'
+                    html +='<li><span class="title"><a href="'
                     + item.link
                     + '">'
                     + item.title
-                    + '</a></li>';
+                    + '</a></span><span class="date">'
+                    + $.timeago(item.updated)
+                    +'</span></li>';
                 }
                 $( id+' ul.items').append(html);
             }    
@@ -56,9 +62,9 @@
         });
         
         //fetch rss
-        getNews("/git.atom","#github");
-        getNews("/bbs/feed","#bbs");
-        getNews("/wiki/feed","#wiki");
+        getNews({url:"/git.atom", container:"#github"});
+        getNews({url:"/bbs/feed", container:"#bbs"});
+        getNews({url:"/wiki/feed",container:"#wiki"});
     });
 
 </script>

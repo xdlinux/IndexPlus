@@ -20,6 +20,15 @@ strong{
   font-weight:bolder;
 }
 
+h4 {
+  margin:.2em;
+}
+
+.hidden{
+  display:none;
+}
+
+
 #content{
   padding:0 8em;
   width:auto;
@@ -205,16 +214,9 @@ strong{
   width:5em;
 }
 
-.hidden{
-  display:none;
-}
-
 .feed {
-  width:320px;
+  width:20em;
   min-height:140px;
-}
-h4 {
-  margin:.2em;
 }
 .items {
   margin:0 0;
@@ -223,6 +225,24 @@ h4 {
 color:#ef7715;
 text-decoration:none;
 }
+
 .loader {
   text-align: center;
 }
+
+.items li {
+  white-space:nowrap;
+  overflow:hidden;
+}
+.items span {
+  overflow:hidden;
+}
+.items .title {
+  float:left;
+  width: 15em;
+}
+.items .date {
+  float:right;
+}
+
+
