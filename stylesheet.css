@@ -1,6 +1,6 @@
 body {
   margin-top: 1.0em;
-  background: #e1e1e1 repeat url(img/bg.png) 0 0;
+  background: #e1e1e1 repeat url(img/body_bg.png) 0 0;
   background-attachment: fixed;
   font-family: Helvetica, Arial,微软雅黑,  FreeSans, san-serif;
   text-shadow: 1px 1px 0px #FFFFFF;
@@ -41,22 +41,19 @@ strong{
   list-style: none outside none;
 }
 
-#nav {
-  z-index:0;
-}
-
 /* round navigation button */
 #nav li {
   line-height:1.2em;
   background:rgb(36,87,176);
-  background:rgba(36,87,176,0.8);
-  -pie-background:rgba(36,87,176,0.8);
+  background:rgba(36,87,176,0.7);
+  -pie-background:rgba(36,87,176,0.7);
   border-radius:20px 20px 20px 20px;
   -webkit-border-radius:20px 20px 20px 20px;
   -moz-border-radius:20px 20px 20px 20px;
   -o-border-radius:20px 20px 20px 20px;
   -ms-border-radius:20px 20px 20px 20px;
   margin: 1em 0 1em 0;
+  
   behavior: url(PIE.htc);
 }
 
@@ -91,6 +88,67 @@ strong{
 }
 #nav .xdlinux {
   background: no-repeat url(img/sun.png) 0 0;
+}
+
+@-webkit-keyframes shine {
+  0% {
+    box-shadow: 0 0 16px #ffa000;
+  }
+  100% {
+    box-shadow: 0 0 16px #ffa000, 0 0 26px #ffa000;
+  }
+}
+@-moz-keyframes shine {
+  0% {
+    box-shadow: 0 0 16px #ffa000;
+  }
+  100% {
+    box-shadow: 0 0 16px #ffa000, 0 0 26px #ffa000;
+  }
+}
+@-ms-keyframes shine {
+  0% {
+    box-shadow: 0 0 16px #ffa000;
+  }
+  100% {
+    box-shadow: 0 0 16px #ffa000, 0 0 26px #ffa000;
+  }
+}
+@-o-keyframes shine {
+  0% {
+    box-shadow: 0 0 16px #ffa000;
+  }
+  100% {
+    box-shadow: 0 0 16px #ffa000, 0 0 26px #ffa000;
+  }
+}
+
+#nav .pulse {
+	-webkit-animation-name: shine;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-timing-function: ease-in-out;	
+	
+  -moz-animation-name: shine;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-direction: alternate;
+	-moz-animation-timing-function: ease-in-out;	
+  
+  -o-animation-name: shine;
+	-o-animation-duration: 1s;
+	-o-animation-iteration-count: infinite;
+	-o-animation-direction: alternate;
+	-o-animation-timing-function: ease-in-out;	
+  
+  -ms-animation-name: shine;
+	-ms-animation-duration: 1s;
+	-ms-animation-iteration-count: infinite;
+	-ms-animation-direction: alternate;
+	-ms-animation-timing-function: ease-in-out;	
+  -pie-box-shadow: 0 0 16px #ffa000;
+  behavior: url(PIE.htc);
 }
 
 #nav a {
@@ -164,4 +222,7 @@ h4 {
 .feed h4 a {
 color:#ef7715;
 text-decoration:none;
+}
+.loader {
+  text-align: center;
 }
