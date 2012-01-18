@@ -2,6 +2,13 @@ IndexPlus
 ====
 西电开源社区网站首页雏型，旨在整合西电开源社区网络资源
 
+诚招开发人员
+----
+我们期待你的加入，你只需要略懂以下技能中的一项或几项:
+* javascript/jQuery
+* HTML, CSS
+* 美工设计
+
 Feature
 ---
 #### 首页部分
@@ -24,6 +31,11 @@ Todo
 * 与邮件列表和"Project"项目的信息整合
 * 首页上加入成员博客列表
 * 软件源热门资源
+
+Authors
+---
+贡献者列表:
+* Justin Wong < bigeagle(at)xdlinux(dot)info >
 
 License
 ---
