@@ -67,6 +67,10 @@ strong{
   behavior: url(PIE.htc);
 }
 
+#nav .mail {
+  background: no-repeat url(img/mail.png) 0 0;
+}
+
 #nav .bbs {
   background: no-repeat url(img/bbs.png) 0 0;
 }
