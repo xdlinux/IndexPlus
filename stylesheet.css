@@ -27,7 +27,9 @@ h4 {
 .hidden{
   display:none;
 }
-
+.clear{
+  clear:both;
+}
 
 #content{
   padding:0 8em;
@@ -215,8 +217,10 @@ h4 {
 }
 
 .feed {
+  float:left;
   width:20em;
   min-height:140px;
+  margin-right:1em;
 }
 .items {
   margin:0 0;
@@ -244,5 +248,3 @@ text-decoration:none;
 .items .date {
   float:right;
 }
-
-

@@ -63,7 +63,7 @@
         
         //fetch rss
         getNews({url:"/git.atom", container:"#github"});
-        getNews({url:"/bbs/forum.php?mod=rss", container:"#bbs"});
+        getNews({url:"/bbs/feed", container:"#bbs"});
         getNews({url:"/wiki/feed",container:"#wiki"});
     });
 
@@ -86,7 +86,7 @@
     <div id="current" class="hidden"> 
         <h3> 正在进行 </h3>
     </div>
-    <div id="mirro">
+    <div id="mirror" class="hidden">
     </div>
     <div id="news">
         <h3>社区动态</h3>
@@ -115,6 +115,12 @@
             <div class="loader" ></div>
         </div>
     </div>
+    <div class="clear"></div>    
+    <div class="comment"> 
+        <div id="pinglunla_here"></div>
+        <a href="http://pinglun.la/" id="logo-pinglunla">评论啦</a>
+        <script type="text/javascript" src="http://static.pinglun.la/md/pinglun.la.js" charset="utf-8"></script>
+    </div> 
 </div>
 </body>
 </html>
