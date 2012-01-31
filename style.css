@@ -3,12 +3,17 @@ body{
 }
 #frame{
     width:745px;
-    margin:10px auto 0;
+    margin:100px auto 0;
 }
 #pannel
 {
     border:2px solid #eee;
     padding:10px;
+    -webkit-border-top-right-radius:40px;
+    -moz-border-top-right-radius:40px;
+    -ms-border-top-right-radius:40px;
+    -o-border-top-right-radius:40px;
+    border-top-right-radius:40px;
 }
 .element{
     width:160px;
@@ -17,7 +22,11 @@ body{
     margin:2px;
     font-size:small;
     -webkit-border-top-right-radius:40px;
-    background:#F30;
+    -moz-border-top-right-radius:40px;
+    -ms-border-top-right-radius:40px;
+    -o-border-top-right-radius:40px;
+    border-top-right-radius:40px;
+    background:#F10;
     background:-webkit-gradient(linear,120 0,100% 0,from(#f30),to(#f60));
     background:-moz-gradient(left,#f30,#f30 110,#f66 100%);
     overflow:hidden;
@@ -33,8 +42,10 @@ body{
     float:right;
     -webkit-border-radius:0.5em 0 0 0.5em;
     -moz-border-radius:0.5em 0 0 0.5em;
+    -ms-border-radius:0.5em 0 0 0.5em;
     -o-border-radius:0.5em 0 0 0.5em;
     border-radius:0.5em 0 0 0.5em;
+    -webkit-box-shadow:0 1px 3px #333;
 }
 
 .element.Success
@@ -47,9 +58,9 @@ body{
 
 .element.Syncing
 {
-    background:#f60;
-    background:-webkit-gradient(linear,120 0,100% 0,from(#f60),to(#f90));
-    background:-moz-gradient(left,#F60,#F60 110,#f90 100%);
+    background:#f90;
+    background:-webkit-gradient(linear,120 0,100% 0,from(#f90),to(#ff0));
+    background:-moz-gradient(left,#F90,#F90 110,#ff0 100%);
 
 }
 .element.Syncing a
@@ -57,6 +68,30 @@ body{
     color:#f60;
 }
 
+.element.large-size{
+    width:336px;
+    height:336px;
+}
+.element.large-size h1{
+    font-size:10em;
+}
+.element.large-size{
+    font-size:1em;
+}
+.element.large-size a{
+    font-size:1.4em;
+}
+
+.element.large-height{
+    height:240px;
+}
+.element.large-height h1{
+   font-size:8em; 
+}
+.element.large-height a{
+   font-size:1em; 
+   margin-top:1em;
+}
 
 .element h1{color:white;font-size:5em;margin:0.05em 0 0.2em 30px;text-transform:capitalize;white-space:nowrap}
 .element h2{font-size:1em;margin:0;text-transform:capitalize;white-space:nowrap;}

@@ -18,7 +18,6 @@ You should have received a copy of the GNU General Public License along with thi
     </head>
     <body>
         <div id="frame">
-            <img src="img/logo.png" alt="logo" />
             <div id="pannel">
                 <div id="container">
 
@@ -51,9 +50,15 @@ You should have received a copy of the GNU General Public License along with thi
                             $('<p></p>').append('<strong>Last Sync:</strong><br/>')
                             .append(t.lastsync)
                           )
-                        .append($('<a></a>').text(category).attr('href',t.log))
+                        .append($('<a></a>').text(category).attr('href',t.log));
                         container.append(node);
                         });
+                    container.children().eq(0).addClass('large-size')
+                    container.children().eq(1).addClass('large-height')
+                    container.children().eq(3).addClass('large-height')
+                    container.children().eq(6).addClass('large-height')
+                    container.children().eq(13).addClass('large-height')
+
                     container.isotope({'itemSelector':'.element',
                                 'masonry':{'columnWidth':180},
                                 'masonryHorizontal':{'rowHeight':180},
