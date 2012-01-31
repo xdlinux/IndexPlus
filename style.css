@@ -1,147 +1,63 @@
-body,a{
-  font-family: Arial, "MS Trebuchet", sans-serif;
-  color:#52c3dd;
-  padding:10px 20px;
-  margin:0;
+body{
+  font-family:'Helvetica Neue', Arial, "MS Trebuchet", sans-serif;
 }
-p{margin:0.5em 0}
-dd,a{margin:0;padding:0;overflow:hidden;}
-strong{
-  font-weight:bolder;
+#frame{
+    width:745px;
+    margin:10px auto 0;
 }
-header,footer,.header,.footer{
-  max-width:400px;
-  min-width:100px;
-  overflow:hidden;
+#pannel
+{
+    border:2px solid #eee;
+    padding:10px;
 }
-.header{
-  text-transform:uppercase;
+.element{
+    width:160px;
+    height:160px;
+    padding:6px;
+    margin:2px;
+    font-size:small;
+    -webkit-border-top-right-radius:40px;
+    background:#F30;
+    background:-webkit-gradient(linear,120 0,100% 0,from(#f30),to(#f60));
+    background:-moz-gradient(left,#f30,#f30 110,#f66 100%);
+    overflow:hidden;
+    color:#ccc;
+
 }
-.header img{
-  float:left;
-}
-.header p{
-  padding:0em 5em;
-}
-.footer dt{
-  font-size:larger;
-  margin:0 0 0.5em;
-}
-.panel{
-  color:white;
-  background-color:#52c3dd;
-  overflow:hidden;
-  margin:1em 0;
-  padding:20px;
-  min-width:320px;
-}
-.panel dl{
-  max-width:600px;
-  margin:5em 0 4em 0;
-}
-.right{
-  float:right;
-  font-size:larger;
-  text-transform:uppercase;
-}
-.right span{
-  font-size:smaller;
-}
-#content{
-  padding:20px 0;
-  width:auto;
-  height:auto;
-}
-.flip-container {
-  color:#fff;
-  float:left;
-  text-decoration:none;
-  font-size:larger;
-  width:100px;
-  height:100px;
-  display:block;
-  margin:0 10px 10px 0;
-  background-color:rgba(255,255,255,0.2);
-}
-.flip-container:hover {
-}
-.flip{
-  width:auto;
-  height:auto;
-}
-.front{
-  width:100px;
-  height:100px;
-  background-color:white;
-}
-.back{
-  position:absolute;
-  left:-9000px;
-  top:-9000px;
-  padding:0 8px;
-  opacity:0;
-  background-color: #ffd23f;
-  -webkit-transition:opacity 0.5s ease-in-out;
-  -moz-transition:opacity 0.5s ease-in-out;
-  -ms-transition:opacity 0.5s ease-in-out;
-  -o-transition:opacity 0.5s ease-in-out;
-  transition:opacity 0.5s ease-in-out;
+.element a{
+    background:white;padding:0 0.5em;margin-right:-6px ;
+    font-size:0.5em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#f30;
+    float:right;
+    -webkit-border-radius:0.5em 0 0 0.5em;
+    -moz-border-radius:0.5em 0 0 0.5em;
+    -o-border-radius:0.5em 0 0 0.5em;
+    border-radius:0.5em 0 0 0.5em;
 }
 
-.back ul {
-  padding:0;
+.element.Success
+{
+    background:#06F;
+    background:-webkit-gradient(linear,120 0,100% 0,from(#06F),to(#09f));
+    background:-moz-gradient(left,#06f,#06f 110,#09f 100%);
 }
-.back li {
-  list-style: none outside none;
+.element.Success a{color:#06F;}
+
+.element.Syncing
+{
+    background:#f60;
+    background:-webkit-gradient(linear,120 0,100% 0,from(#f60),to(#f90));
+    background:-moz-gradient(left,#F60,#F60 110,#f90 100%);
+
+}
+.element.Syncing a
+{
+    color:#f60;
 }
 
-a.repo {
-  color:#0a77ff;
-  display:block;
-  font-size:2em;
-  text-decoration:none;
-  -webkit-text-shadow: 1px 1px 4px #fff;
-  -moz-text-shadow: 1px 1px 4px #fff;
-  -o-text-shadow: 1px 1px 4px #fff;
-  -ms-text-shadow: 1px 1px 4px #fff;
-  text-shadow: 1px 1px 4px #fff;
-}
-a.log {
-  color:#fff;
-}
 
-#notice{
-  margin:2em 0;
-  border:1px solid white;
-}
-
-.sample{
-  display:none;
-}
-
-.syncing{
-  -webkit-box-shadow: 0px 0px 10px #0bff00;
-  -moz-box-shadow: 0px 0px 10px #0BFF00;
-  -o-box-shadow: 0px 0px 10px #0BFF00;
-  -ms-box-shadow: 0px 0px 10px #0BFF00;
-  box-shadow: 0px 0px 10px #0BFF00;
-}
-.fail{
-  -webkit-box-shadow: 0px 0px 10px #ff0300;
-  -moz-box-shadow: 0px 0px 10px #ff0300;
-  -o-box-shadow: 0px 0px 10px #ff0300;
-  -ms-box-shadow: 0px 0px 10px #ff0300;
-  box-shadow: 0px 0px 10px #ff0300;
-}
-.fail .front {
-  background: #ffac97;
-}
-.fail .back {
-  background: #ea1800;
-}
-.syncing .front {
-  background: #ffee7f;
-}
-.syncing .back {
-  background: #78db00;
-}
+.element h1{color:white;font-size:5em;margin:0.05em 0 0.2em 30px;text-transform:capitalize;white-space:nowrap}
+.element h2{font-size:1em;margin:0;text-transform:capitalize;white-space:nowrap;}
+.element p{margin:0px 0 5px 0;font-size:0.8em;}
