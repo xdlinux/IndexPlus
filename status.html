@@ -18,6 +18,11 @@ You should have received a copy of the GNU General Public License along with thi
     </head>
     <body>
         <div id="frame">
+            <div id="filter">
+                <a href="#" class="checked" id="success">Success</a>
+                <a href="#" class="checked" id="syncing" >Syncing</a>
+                <a href="#" class="checked" id="failed">Failed</a>
+            </div>
             <div id="pannel">
                 <div id="container">
 
@@ -49,29 +54,47 @@ You should have received a copy of the GNU General Public License along with thi
                         .append(
                             $('<p></p>').append('<strong>Last Sync:</strong><br/>')
                             .append(t.lastsync)
-                          )
+                            )
                         .append($('<a></a>').text(category).attr('href',t.log));
                         container.append(node);
                         });
                     container.children().eq(0).addClass('large-size')
-                    container.children().eq(1).addClass('large-height')
-                    container.children().eq(3).addClass('large-height')
-                    container.children().eq(6).addClass('large-height')
-                    container.children().eq(13).addClass('large-height')
+                        container.children().eq(1).addClass('large-height')
+                        container.children().eq(3).addClass('large-height')
+                        container.children().eq(6).addClass('large-height')
+                        container.children().eq(13).addClass('large-height')
 
-                    container.isotope({'itemSelector':'.element',
+                        container.isotope({
+                                'filter':'*',
+                                'itemSelector':'.element',
                                 'masonry':{'columnWidth':180},
                                 'masonryHorizontal':{'rowHeight':180},
-                            });
+                                });
                     }
-                    $.ajax({ url: "m_status.json",
-                            method: 'GET',
-                            dataType: 'json',
-                            success: onDataReceived
-                            });
+                    $('#syncing,#success,#failed').click(
+                            function(){
+                            $(this).toggleClass('checked');
+                            var filters=new Array();
+                            if($('#syncing').hasClass('checked')) filters.push('.Syncing') 
+                            if($('#success').hasClass('checked')) filters.push('.Success') 
+                            if($('#failed').hasClass('checked')) filters.push('.Failed') 
+
+                            if(filters.length==0) $('#syncing,#success,#failed').addClass('checked');
+
+                            container.isotope({'filter':filters.join(',')})
+
+
+                            }
+                            )
+
+                        $.ajax({ url: "m_status.json",
+                                method: 'GET',
+                                dataType: 'json',
+                                success: onDataReceived
+                                });
 
 
             });
-        </script>
+</script>
     </body>
 </html>

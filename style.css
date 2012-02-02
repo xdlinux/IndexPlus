@@ -1,6 +1,35 @@
 body{
   font-family:'Helvetica Neue', Arial, "MS Trebuchet", sans-serif;
 }
+#filter{padding:5px 10px}
+#filter a{
+    background-color:#aaa;
+    background-image:url(img/checkbox.png);
+    background-position:5px center;
+    background-repeat:no-repeat;
+    color:white;
+    font-size:0.8em;
+    padding:0.1em 0.5em 0.1em 25px;
+    text-decoration:none;
+    text-transform:uppercase;
+    margin:0.1em;
+    -webkit-border-radius: 0.6em;
+    -moz-border-radius: 0.6em;
+    -ms-border-radius: 0.6em;
+    -o-border-radius: 0.6em;
+    border-radius: 0.6em;
+}
+#success.checked{
+    background-color:#06f;
+}
+#syncing.checked{
+    background-color:#f90;
+}
+#failed.checked
+{
+    background-color:#f10;
+}
+
 #frame{
     width:745px;
     margin:100px auto 0;
@@ -96,3 +125,26 @@ body{
 .element h1{color:white;font-size:5em;margin:0.05em 0 0.2em 30px;text-transform:capitalize;white-space:nowrap}
 .element h2{font-size:1em;margin:0;text-transform:capitalize;white-space:nowrap;}
 .element p{margin:0px 0 5px 0;font-size:0.8em;}
+
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+       -o-transition-property:         top, left, opacity;
+          transition-property:         transform, opacity;
+}
