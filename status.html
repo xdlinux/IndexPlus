@@ -2,8 +2,8 @@
 <!--
 COPYRIGHT (c) Xidian Open Source Community < xdl@xdlinux.info >
 Author:
-  - Shanzi <ant_sz@xdlinux.info>
-  - Justin Wong <bigeagle@xdlinux.info>
+- Shanzi <ant_sz@xdlinux.info>
+- Justin Wong <bigeagle@xdlinux.info>
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -12,110 +12,119 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 -->
 <html>
-  <head>
-    <title>Mirror Status | xdlinux</title>
-    <link rel="stylesheet" type="text/css" href="style.css" /> 
-  </head>
-  <body>
-    <header class='header'>
-    <img src="img/logo.png" alt="logo" />
-    <p>A brief dashboard showing xdlinux mirror syncronizing status.</p>
-    </header>
-    <div class="panel">
-      <dl>
-        <dd id='content'>
-        <div class='flip-container sample'>
-          <div class='flip'>
-            <div class="front">
-              <img src="img/ubuntu.png"  />
+    <head>
+        <title>Mirror Status | xdlinux</title>
+        <link rel="stylesheet" type="text/css" href="style.css" /> 
+    </head>
+    <body>
+        <div id="frame">
+            <div id="filter">
+                <a href="#" class="checked" id="success">Success</a>
+                <a href="#" class="checked" id="syncing" >Syncing</a>
+                <a href="#" class="checked" id="failed">Failed</a>
+                <select id="sort">
+                    <option value="original-order">Original Order</option>
+                    <option value="name">Name</option>
+                    <option value="time">Last Sync</option>
+                    <option value="random">Random</option>
+                </select>
             </div>
-            <div class="back">
+            <div id="pannel">
+                <div id="container">
+
+                </div>
             </div>
-          </div>
         </div>
-        </dd>
-        <dd>
-        <a href="http://groups.xdlinux.info/" ><img src="img/mail.png" alt="Mail List" /></a>
-        <a href="http://t.xdlinux.info/" ><img src="img/twitter.png" alt="Twitter" /></a>
-        <a href="http://xdlinux.info/bbs/" ><img src="img/bbs.png" alt="BBS" /></a>
-        <a href="ftp://linux.xidian.edu.cn/" ><img src="img/ftp.png" alt="FTP" /></a>
-        </dd>
-        <dd>When discovered something new, we put an eye on it.
-        <br>When discovered something cool, we spread it.
-        <br>All we know, all we have, all we like, we'd like to share with you! </dd>
-        <dd id="notice">
-        Mozzilla Firefox 4.0+ , Chrome 7+(with GPU render enabled), Safari 5.0+ are recommended to view this page.
-        </dd>
-      </dl>
-      <div class="right">E<span>njoy</span> I<span>t</span></div>
-    </div>
-    <footer class='footer'>
-    <dl>
-      <dt>
-      <strong>Open Source For Everyone</strong>
-      </dt>
-      <dd>
-      <p>					We believe that Open Source make lives better, not only for programer but also for everyone who need to work with computer.</p>
-      <p>					Explore our site to know who we are, what we do and why we do that.</p>
-      <p>					Know more about Open Source, please refer to <a href="http://en.wikipedia.org/wiki/Open_source#Computer_software"><strong>Wikipedia</strong></a></p>
-      </dd>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.min.js">
+        </script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.isotope.min.js">
+        </script>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function(){
+                    var container=$('#container');
+                    function onDataReceived(ss){ 
+                    $.each(ss,function(i,t){
+                        var category='Failed';
+                        if( t.status == "0")
+                        {
+                        category="Success";
+                        }
+                        else if ( t.status == "-1" ){
+                        category="Syncing";
+                        }
+                        var ymd=t.lastsync.match(/(\d{4})-(\d{2})-(\d{2})/)
+                        var hms=t.lastsync.match(/(\d{2}):(\d{2}):(\d{2})/)
+                        try{
+                            var d=new Date();
+                            d.setFullYear(parseInt(ymd[1],10))
+                            d.setMonth(parseInt(ymd[2],10))
+                            d.setDate(parseInt(ymd[3],10))
+                            d.setHours(parseInt(hms[1],10))
+                            d.setMinutes(parseInt(hms[2],10))
+                            d.setSeconds(parseInt(hms[3],10))
+                            var ti=d.getTime();
+                        }catch(e)
+                        {
+                        var ti=0;
+                        }
+                        var node=$('<div></div>');
+                        node.addClass(category).addClass('element')
+                        .attr('data-category',category)
+                        .attr('data-name',i.toUpperCase())
+                        .attr('data-time',ti)
+                        .append($('<h2></h2>').text(i))
+                        .append($('<h1></h1>').text(i))
+                        .append(
+                            $('<p></p>').append('<strong>Last Sync:</strong><br/>')
+                            .append(t.lastsync)
+                            )
+                        .append($('<a></a>').text(category).attr('href',t.log));
+                        container.append(node);
+                        });
+                    container.children().eq(0).addClass('large-size')
+                        container.children().eq(1).addClass('large-height')
+                        container.children().eq(3).addClass('large-height')
+                        container.children().eq(6).addClass('large-height')
+                        container.children().eq(13).addClass('large-height')
 
-    </dl>
-    </footer>
-    <script type="text/javascript" charset="utf-8" src='js/jquery.min.js'>
-    </script>
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function(){
-        $.ajax({
-          url: "/m_status.json",
-          method: 'GET',
-          dataType: 'json',
-          success: onDataReceived
-        });
-        function onDataReceived(ss){ 
-          $.each(ss,function(i,t){
-            if( t.status == "0")
-            {
-              stat="<span style='color:#0056ff;'>Success!</span>";
-              s_class="";
-            }
-            else if ( t.status == "-1" ){
-              stat="<span style='color:#ffe700;'>Syncing</span>";
-              s_class="syncing";
-            }
-            else 
-            {
-              stat="<span style='color:#fffc00;'><b>FAIL!</b></span>";
-              s_class="fail";
-            }
-            var node=$('.sample').clone().removeClass('sample');
-            node.addClass(s_class);
-            node.find('img').attr('src','img/'+t.icon);
-            node.find('.back').append("<br/><a class='repo' href='http://ftp.xdlinux.info/"+i+"' >"+i+"</a> "
-              +"<div class='status'><ul>"
-              +"<li> <b>Status</b>:&nbsp;&nbsp;"+ stat +"&nbsp;&nbsp;<a class='log'"
-              +"href='"+t.log+"'>"+i+".log</a> </li>"
-              +"<li> <b>Upstream</b>:&nbsp;&nbsp;"+ t.upstream +" </li>"
-              +"<li> <b>LastSync</b>:&nbsp;&nbsp;"+ t.lastsync +" </li>"
-            +"</ul></div>");
-            $('#content').append(node);
-          });
-          $('.flip').hover(function(){
-            $(this).children(".back").css({
-              "left":$(this).offset().left,
-              "top":$(this).offset().top,
-              "opacity":1
-            }); 
-          },function(){
-            $(this).children(".back").css({
-              "left":-9000,
-              "top":-9000,
-              "opacity":0
-            }); 
-          });
-        }
+                        container.isotope({
+                                'filter':'*',
+                                'itemSelector':'.element',
+                                'masonry':{'columnWidth':180},
+                                'masonryHorizontal':{'rowHeight':180},
+                                'getSortData':{
+                                    'name': function(ele){return ele.attr('data-name')},
+                                    'time': function(ele){return ele.attr('data-time')}
+                                }
+                                });
+                    }
+                    $('#sort').bind('change',function(){
+                                container.isotope(
+                                    {'sortBy':$('#sort').val()}
+                                    )
+                            });
+                    $('#syncing,#success,#failed').click(
+                            function(){
+                            $(this).toggleClass('checked');
+                            var filters=new Array();
+                            if($('#syncing').hasClass('checked')) filters.push('.Syncing') 
+                            if($('#success').hasClass('checked')) filters.push('.Success') 
+                            if($('#failed').hasClass('checked')) filters.push('.Failed') 
 
-      });
-    </script>
-  </body>
+                            if(filters.length==0) $('#syncing,#success,#failed').addClass('checked');
+
+                            container.isotope({'filter':filters.join(',')})
+                            }
+                            )
+
+                        $.ajax({ url: "/m_status.json",
+                                method: 'GET',
+                                dataType: 'json',
+                                success: onDataReceived
+                                });
+
+
+            });
+</script>
+    </body>
 </html>
