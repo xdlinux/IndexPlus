@@ -22,6 +22,12 @@ You should have received a copy of the GNU General Public License along with thi
                 <a href="#" class="checked" id="success">Success</a>
                 <a href="#" class="checked" id="syncing" >Syncing</a>
                 <a href="#" class="checked" id="failed">Failed</a>
+                <select id="sort">
+                    <option value="original-order">Original Order</option>
+                    <option value="name">Name</option>
+                    <option value="time">Last Sync</option>
+                    <option value="random">Random</option>
+                </select>
             </div>
             <div id="pannel">
                 <div id="container">
@@ -46,9 +52,26 @@ You should have received a copy of the GNU General Public License along with thi
                         else if ( t.status == "-1" ){
                         category="Syncing";
                         }
+                        var ymd=t.lastsync.match(/(\d{4})-(\d{2})-(\d{2})/)
+                        var hms=t.lastsync.match(/(\d{2}):(\d{2}):(\d{2})/)
+                        try{
+                            var d=new Date();
+                            d.setFullYear(parseInt(ymd[1],10))
+                            d.setMonth(parseInt(ymd[2],10))
+                            d.setDate(parseInt(ymd[3],10))
+                            d.setHours(parseInt(hms[1],10))
+                            d.setMinutes(parseInt(hms[2],10))
+                            d.setSeconds(parseInt(hms[3],10))
+                            var ti=d.getTime();
+                        }catch(e)
+                        {
+                        var ti=0;
+                        }
                         var node=$('<div></div>');
                         node.addClass(category).addClass('element')
                         .attr('data-category',category)
+                        .attr('data-name',i.toUpperCase())
+                        .attr('data-time',ti)
                         .append($('<h2></h2>').text(i))
                         .append($('<h1></h1>').text(i))
                         .append(
@@ -69,8 +92,17 @@ You should have received a copy of the GNU General Public License along with thi
                                 'itemSelector':'.element',
                                 'masonry':{'columnWidth':180},
                                 'masonryHorizontal':{'rowHeight':180},
+                                'getSortData':{
+                                    'name': function(ele){return ele.attr('data-name')},
+                                    'time': function(ele){return ele.attr('data-time')}
+                                }
                                 });
                     }
+                    $('#sort').bind('change',function(){
+                                container.isotope(
+                                    {'sortBy':$('#sort').val()}
+                                    )
+                            });
                     $('#syncing,#success,#failed').click(
                             function(){
                             $(this).toggleClass('checked');
@@ -82,8 +114,6 @@ You should have received a copy of the GNU General Public License along with thi
                             if(filters.length==0) $('#syncing,#success,#failed').addClass('checked');
 
                             container.isotope({'filter':filters.join(',')})
-
-
                             }
                             )
 
