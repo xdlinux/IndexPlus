@@ -1,126 +1,136 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>西电开源社区 - 0pen Source, 0pen Mind!</title>
-<link rel="stylesheet" type="text/css" href="stylesheet.css" /> 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.timeago.js"></script>
-<script type="text/javascript" src="js/jquery.timeago.zh-cn.js"></script>
-<script type="text/javascript" src="js/jquery.jfeed.pack.js"></script>
-<script type="text/javascript" src="js/spin.min.js"></script>
-<script type="text/javascript" src="js/jquery.spin.js"></script>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>西电开源社区 - 0pen Source, 0pen Mind!</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css" /> 
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.timeago.js"></script>
+        <script type="text/javascript" src="js/jquery.timeago.zh-cn.js"></script>
+        <script type="text/javascript" src="js/jquery.jfeed.pack.js"></script>
+        <script type="text/javascript" src="js/spin.min.js"></script>
+        <script type="text/javascript" src="js/jquery.spin.js"></script>
 
-<script type="text/javascript">
-    // get rss from @url and put into @id 
-    function getNews(options){
-        var url=options.url;
-        var id=options.container;
-        $.getFeed({
-            url: url,
-            error: function(XMLHttpRequest) {
-                $(id).find('.loader').addClass("hidden"); 
-                $(id).append(
-                    '<div class="error_msg" > 矮油！出错啦！ </div>'
-                );
-            },
-            success: function(feed) {
-                $(id).find('.loader').addClass("hidden"); 
-                var html = '';
-                for(var i = 0; i < feed.items.length && i < 11; i++) {
-                    var item = feed.items[i];
-                    html +='<li><span class="title"><a href="'
-                    + item.link
-                    + '">'
-                    + item.title
-                    + '</a></span><span class="date">'
-                    + $.timeago(item.updated)
-                    +'</span></li>';
-                }
-                $( id+' ul.items').append(html);
-            }    
+        <script type="text/javascript">
+            // get rss from @url and put into @id 
+        function getNews(options){
+            var url=options.url;
+            var id=options.container;
+            $.getFeed({
+                url: url,
+                error: function(XMLHttpRequest) {
+                    $(id).find('.loader').addClass("hidden"); 
+                    $(id).append(
+                        '<div class="error_msg" > 矮油！出错啦！ </div>'
+                    );
+                },
+                success: function(feed) {
+                    $(id).find('.loader').addClass("hidden"); 
+                    var html = '';
+                    for(var i = 0; i < feed.items.length && i < 11; i++) {
+                        var item = feed.items[i];
+                        html +='<li><span class="title"><a href="'
+                        + item.link
+                        + '">'
+                        + item.title
+                        + '</a></span><span class="date">'
+                        + $.timeago(item.updated)
+                        +'</span></li>';
+                    }
+                    $( id+' ul.items').append(html);
+                }    
+            });
+        }
+        $(document).ready(function() {
+            //ajax loading animation
+            $(".loader").spin("small","#2c5794");
+            $(".loader").append("<br /><br/><span>唔，我正在努力的加载 &gt;_&lt; </span>"); 
+
+            //fix navigation panel position
+            navYloc = parseInt($("#nav").css("top").substring(0, $("#nav").css("top").indexOf("px")));
+            $(window).scroll(function() { 
+                offset = navYloc + $(document).scrollTop() + "px"; 
+                $("#nav").animate({ top: offset }, { duration: 500, queue: false }); 
+            }); 
+
+            //navigation button hover style change
+            $("#nav li").hover(function(){
+                $(this).addClass("hover"); 
+            },function(){
+                $(this).removeClass("hover"); 
+            });
+
+            //fetch rss
+            getNews({url:"/git.atom", container:"#github"});
+            getNews({url:"/bbs/feed", container:"#bbs"});
+            getNews({url:"/wiki/feed",container:"#wiki"});
         });
-    }
-    $(document).ready(function() {
-        //ajax loading animation
-        $(".loader").spin("small","#2c5794");
-        $(".loader").append("<br /><br/><span>唔，我正在努力的加载 &gt;_&lt; </span>"); 
-        
-        //fix navigation panel position
-        navYloc = parseInt($("#nav").css("top").substring(0, $("#nav").css("top").indexOf("px")));
-        $(window).scroll(function() { 
-            offset = navYloc + $(document).scrollTop() + "px"; 
-            $("#nav").animate({ top: offset }, { duration: 500, queue: false }); 
-        }); 
 
-        //navigation button hover style change
-        $("#nav li").hover(function(){
-            $(this).addClass("hover"); 
-        },function(){
-            $(this).removeClass("hover"); 
-        });
-        
-        //fetch rss
-        getNews({url:"/git.atom", container:"#github"});
-        getNews({url:"/bbs/feed", container:"#bbs"});
-        getNews({url:"/wiki/feed",container:"#wiki"});
-    });
-
-</script>
+    </script>
 
 </head>
 <body>
-<div id="nav">
-    <li class="pulse"><a href="/maillist/" class="mail"><span><div>邮件列表</div></span></a></li>
-    <li><a href="/bbs/" class="bbs"><span><div>论坛</div></span></a></li>
-    <li><a href="/wiki/" class="wiki"><span><div>Wiki</div></span></a></li>
-    <li><a href="/index/status.html" class="mirror"><span><div>软件源</div></span></a></li>
-    <li><a href="/project" class="project"><span><div>项目</div></span></a></li>
-    <li><a href="/book/" class="book"><span><div>图书</div></span></a></li>
-    <li><a href="http://rt.xdlinux.info/" class="rt"><span><div>实时</div></span></a></li>
-    <li><a href="http://xdlinux.info/xdlinux.html" class="xdlinux"><span><div>xdlinux宣言</div></span></a></li>
-</div>
-<div id="content">
-    <h1> 西电开源社区 - 0pen Source, 0pen Mind!</h1> 
-    <div id="current" class="hidden"> 
-        <h3> 正在进行 </h3>
+    <div id="nav">
+        <li class="pulse"><a href="/maillist/" class="mail"><span><div>邮件列表</div></span></a></li>
+        <li><a href="/bbs/" class="bbs"><span><div>论坛</div></span></a></li>
+        <li><a href="/wiki/" class="wiki"><span><div>Wiki</div></span></a></li>
+        <li><a href="/index/status.html" class="mirror"><span><div>软件源</div></span></a></li>
+        <li><a href="/project" class="project"><span><div>项目</div></span></a></li>
+        <li><a href="/book/" class="book"><span><div>图书</div></span></a></li>
+        <li><a href="http://rt.xdlinux.info/" class="rt"><span><div>实时</div></span></a></li>
+        <li><a href="http://xdlinux.info/xdlinux.html" class="xdlinux"><span><div>xdlinux宣言</div></span></a></li>
     </div>
-    <div id="mirror" class="hidden">
+    <div id="content">
+        <h1> 西电开源社区 - 0pen Source, 0pen Mind!</h1> 
+        <div id="current" class="hidden"> 
+            <h3> 正在进行 </h3>
+        </div>
+        <div id="mirror" class="hidden">
+        </div>
+        <div id="news">
+            <h3>社区动态</h3>
+            <div id="bbs" class="feed">
+                <h4><a href="/bbs">论坛新帖</a></h4>
+                <div class="items">
+                    <ul class="items">
+                    </ul>
+                </div>
+                <div class="loader" ></div>
+            </div>
+            <div id="wiki" class="feed">
+                <h4><a href="/wiki">Wiki更新</a></h4>
+                <div class="items">
+                    <ul class="items">
+                    </ul>
+                </div>
+                <div class="loader" ></div>
+            </div>
+            <div id="github" class="feed">
+                <h4><a href="/index/project.html">项目动态</a></h4>
+                <div class="items">
+                    <ul class="items">
+                    </ul>
+                </div>
+                <div class="loader" ></div>
+            </div>
+        </div>
+        <div class="clear"></div>    
+        <div class="comment"> 
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'xdlinux'; // required: replace example with your forum shortname
+                var disqus_identifier = 'xdlinux/index'; 
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink"><span class="logo-disqus">Disqus</span></a>
+
+        </div> 
     </div>
-    <div id="news">
-        <h3>社区动态</h3>
-        <div id="bbs" class="feed">
-            <h4><a href="/bbs">论坛新帖</a></h4>
-            <div class="items">
-                <ul class="items">
-                </ul>
-            </div>
-            <div class="loader" ></div>
-        </div>
-        <div id="wiki" class="feed">
-            <h4><a href="/wiki">Wiki更新</a></h4>
-            <div class="items">
-                <ul class="items">
-                </ul>
-            </div>
-            <div class="loader" ></div>
-        </div>
-        <div id="github" class="feed">
-            <h4><a href="/index/project.html">项目动态</a></h4>
-            <div class="items">
-                <ul class="items">
-                </ul>
-            </div>
-            <div class="loader" ></div>
-        </div>
-    </div>
-    <div class="clear"></div>    
-    <div class="comment"> 
-        <div id="pinglunla_here"></div>
-        <a href="http://pinglun.la/" id="logo-pinglunla">评论啦</a>
-        <script type="text/javascript" src="http://static.pinglun.la/md/pinglun.la.js" charset="utf-8"></script>
-    </div> 
-</div>
 </body>
 </html>
