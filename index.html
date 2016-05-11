@@ -116,32 +116,34 @@
             </div>
         </div>
         <div class="clear"></div>
-
-    <form method="get" action="http://www.google.com.hk/search" target="google_window">
-    <a href="http://www.google.com.hk/"><img src="http://www.google.com/logos/Logo_25wht.gif" border="0" alt="Google" align="middle"></img></a>
-        <input type="text" name="as_q" size="31" maxlength="255" value=""/>
-        <input type="submit" name="sa" value="搜索"/>
-        <input type="radio" name="as_sitesearch" value="xdlinux.info/wiki" checked="checked"/>
-        <font size="-1" color="#000000">wiki</font>
-        <input type="radio" name="as_sitesearch" value="xdlinux.info/bbs" checked="checked"/>
-        <font size="-1" color="#000000">bbs</font>
-        <input type="radio" name="as_sitesearch" value="groups.google.com/group/xidian_linux" checked="checked"/>
-        <font size="-1" color="#000000">groups(邮件列表)</font>
-        <input type="radio" name="as_sitesearch" value="xdlinux.info" checked="checked"/>
-        <font size="-1" color="#000000">xdlinux全站搜索</font>
-        
-        <input name="newwindow" value="1" type="hidden"/>
-        <input name="complete" value="1" type="hidden"/>
-        <input name="forid" value="zh-CN" type="hidden"/>
-        <input type="hidden" name="num" value="10"/>
-        <input name="btnG" value="Google+%E6%90%9C%E7%B4%A2&amp;" type="hidden"/>
-        <input name="as_ft" value="1" type="hidden"/>
-        <input name="as_qdr" value="all" type="hidden"/>
-        <input name="as_occt" value="any" type="hidden"/>
-        <input name="as_dt" value="i" type="hidden"/>
-    </form>
-    
-        <div class="comment"> 
+        <!--Google站内搜索开始-->
+        <div>
+        <form method="get" action="http://www.google.com.hk/search" target="google_window">
+        <a href="http://www.google.com.hk/"><img src="http://www.google.com/logos/Logo_25wht.gif" border="0" alt="Google" align="middle"></img></a>
+            <input type="text" name="as_q" size="31" maxlength="255" value=""/>
+            <input type="submit" name="sa" value="搜索"/>
+            <input type="radio" name="as_sitesearch" value="http://xdlinux.info/wiki" checked="checked"/>
+            <font size="-1" color="#000000">wiki</font>
+            <input type="radio" name="as_sitesearch" value="http://xdlinux.info/bbs" checked="checked"/>
+            <font size="-1" color="#000000">bbs</font>
+            <input type="radio" name="as_sitesearch" value="http://groups.google.com/group/xidian_linux" checked="checked"/>
+            <font size="-1" color="#000000">邮件列表</font>
+            <input type="radio" name="as_sitesearch" value="http://xdlinux.info" checked="checked"/>
+            <font size="-1" color="#000000">xdlinux全站搜索</font>
+            
+            <input name="newwindow" value="1" type="hidden"/>
+            <input name="complete" value="1" type="hidden"/>
+            <input name="forid" value="zh-CN" type="hidden"/>
+            <input type="hidden" name="num" value="10"/>
+            <input name="btnG" value="Google+%E6%90%9C%E7%B4%A2&amp;" type="hidden"/>
+            <input name="as_ft" value="1" type="hidden"/>
+            <input name="as_qdr" value="all" type="hidden"/>
+            <input name="as_occt" value="any" type="hidden"/>
+            <input name="as_dt" value="i" type="hidden"/>
+        </form>
+        </div>
+        <!--Google站内搜索结束-->
+        <div class="comment">
             <div id="disqus_thread"></div>
             <script type="text/javascript">
                 var disqus_shortname = 'xdlinux'; // required: replace example with your forum shortname
